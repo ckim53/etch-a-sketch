@@ -17,6 +17,9 @@ for (row; row < 16; row++) {
     col = 0;
     for (col; col < 16; col++) {
         const square = createSquare(squareSize);
+        square.addEventListener("mouseenter", () => {
+            square.style.backgroundColor = "green";
+        })
         container.appendChild(square);
     }
 }
