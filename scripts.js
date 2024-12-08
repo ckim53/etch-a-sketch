@@ -1,6 +1,3 @@
-let squareSize = 60;
-let newSize = 0;
-
 function createSquare(size) {
     const square = document.createElement("div");
     square.style.width = size + "px";
@@ -20,7 +17,7 @@ function cleanUp() {
 function startGrid(size) {
     let row = 0;
     let col = 0;
-    squareSize = 960 / size;
+    let squareSize = 960 / size;
     const container = document.querySelector(".container");
     for (row; row < size; row++) {
         col = 0;
@@ -33,23 +30,29 @@ function startGrid(size) {
             container.appendChild(square);
         }
     }
-    buttonCheck();
 }
 
-function buttonCheck() {
-    console.log("buttoncheck");
+function getUserInput() {
+    let newSize = prompt("Enter the number of squares per side for the new grid.");
+    if (newSize == null) {
+        return;
+    }
+    while (newSize > 100) {
+        if (newSize == null) {
+            return;
+        }
+        newSize = prompt("The maximum is 100 squares. Please Enter a lower value.")
+    }
+    cleanUp();
+    startGrid(newSize);
+}
+
+function addButton() {
     const button = document.querySelector("button");
     button.textContent = "Start a new grid!";
-    button.addEventListener("click", () => {
-        newSize = prompt("Enter the number of squares per side for the new grid.");
-        while (newSize > 100) {
-            newSize = prompt("The maximum is 100 squares. Please Enter a lower value.")
-        }
-        cleanUp();
-        startGrid(newSize); }
-    );
+    button.addEventListener("click", () => getUserInput());
 }
 
 startGrid(16);
-
+addButton();
 
